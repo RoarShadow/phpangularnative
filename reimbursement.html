@@ -1,0 +1,163 @@
+<div ng-include="'menu.html'"></div>
+<div class="container" style="position:fixed;top:70px;left:0px;width: 100%;max-width: 100%;">
+	<!-- <div class="container" id="usercontainer" ng-controller="employeeCTR" ng-init="fetch()"> -->
+    <div class="col-sm-12" style="color: #FFFFFF;font-weight: bold;background-color: #696969;margin-bottom: 10px;"><h1>RE-IMBURSEMENT</h1></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-success text-center" ng-show="success">
+                <button type="button" class="close" ng-click="clearMessage()"><span aria-hidden="true">×</span></button>
+                <i class="fa fa-check"></i> {{ successMessage }}
+            </div>
+            <div class="alert alert-danger text-center" ng-show="error">
+                <button type="button" class="close" ng-lick="clearMessage()"><span aria-hidden="true">×</span></button>
+                <i class="fa fa-warning"></i> {{ errorMessage }}
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <button href="" class="btn btn-primary" ng-click="showAdd()"><i class="fa fa-plus"></i> Add New RE-IMBURSEMENT</button>
+                    <span class="pull-right">
+                        <input type="text" ng-model="search" class="form-control" placeholder="Search">
+                    </span>
+                </div>
+            </div>
+            <div class="tab">
+                <button class="tablinks" ng-click="pendingtabm()">PENDING</button>
+                <button class="tablinks" ng-click="approvedtabm()" >APPROVED</button>
+                <button class="tablinks" ng-click="foryourapprovaltabm()" >FOR YOUR APPROVAL</button>
+                <button class="tablinks" >REIMBURSEMENT YOU APPROVED</button>
+            </div>
+
+            <div id="London" class="tabcontent" ng-show="pendingtab" style="display:block;">
+                <table class="table table-bordered table-striped" style="margin-top:10px;">
+                    <thead>
+                        <tr>
+                            <th ng-click="sort('reimbursementnum')" class="text-center">REIMBURSEMENT #
+                                <span class="pull-right">
+                                    <i class="fa fa-sort gray" ng-show="sortKey!='name'"></i>
+                                    <i class="fa fa-sort" ng-show="sortKey=='name'" ng-class="{'fa fa-sort-asc':reverse,'fa fa-sort-desc':!reverse}"></i>
+                                </span>
+                            </th>
+                            <th class="text-center">DATE RANGE(YYYY-MM-DD)
+                            </th>
+                            <th ng-click="sort('business')" class="text-center">BUSINESS
+                                <span class="pull-right">
+                                    <i class="fa fa-sort gray" ng-show="sortKey!='office'"></i>
+                                    <i class="fa fa-sort" ng-show="sortKey=='office'" ng-class="{'fa fa-sort-asc':reverse,'fa fa-sort-desc':!reverse}"></i>
+                                </span>
+                            </th>                        
+                            <th ng-click="sort('TotalAmount')" class="text-center">TOTAL AMOUNT
+                                <span class="pull-right">
+                                    <i class="fa fa-sort gray" ng-show="sortKey!='office'"></i>
+                                    <i class="fa fa-sort" ng-show="sortKey=='office'" ng-class="{'fa fa-sort-asc':reverse,'fa fa-sort-desc':!reverse}"></i>
+                                </span>
+                            </th>
+                            <th ng-click="sort('RepTitle')" class="text-center">Report Title
+                                <span class="pull-right">
+                                    <i class="fa fa-sort gray" ng-show="sortKey!='office'"></i>
+                                    <i class="fa fa-sort" ng-show="sortKey=='office'" ng-class="{'fa fa-sort-asc':reverse,'fa fa-sort-desc':!reverse}"></i>
+                                </span>
+                            </th>
+                            <th ng-click="sort('DateCreated')" class="text-center">DATE CREATED
+                                <span class="pull-right">
+                                    <i class="fa fa-sort gray" ng-show="sortKey!='office'"></i>
+                                    <i class="fa fa-sort" ng-show="sortKey=='office'" ng-class="{'fa fa-sort-asc':reverse,'fa fa-sort-desc':!reverse}"></i>
+                                </span>
+                            </th>
+                            <th ng-click="sort('DateSend')" class="text-center">DATE SEND
+                                <span class="pull-right">
+                                    <i class="fa fa-sort gray" ng-show="sortKey!='office'"></i>
+                                    <i class="fa fa-sort" ng-show="sortKey=='office'" ng-class="{'fa fa-sort-asc':reverse,'fa fa-sort-desc':!reverse}"></i>
+                                </span>
+                            </th>
+                            <th class="text-center">Remarks</th>
+                            <th class="text-center">Action</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr dir-paginate="rs in reimblist|orderBy:sortKey:reverse|filter:search|itemsPerPage:7">
+                            <td>{{ rs.ExpenseCountId }}</td>
+                            <td>{{ rs.DateFrom.substr(0,10) }}&nbsp;<b>TO</b>&nbsp;{{ rs.DateTo.substr(0,10) }}</td>
+                            <td>{{ rs.Business }}</td>
+                            <td>{{ rs.totalamount }}</td>
+                            <td>{{ rs.ExpenseTitle }}</td>
+                            <td>{{ rs.CreatedDate}}</td>
+                            <td>{{ rs.DateSend }}</td>
+                            <td>{{ rs.Remarks }}</td>
+                            <td>
+                                <button type="button" class="btn btn-info" ng-click="showEdit(); selectUser(rs);" title="View"><i class='fa fa-eye' style="color:white;"></i></button> 
+                                <button type="button" class="btn btn-warning" ng-click="showEdit(); selectUser(rs);" title="Edit"><i class="fa fa-edit" style="color:white;"></i></button> 
+                                <button type="button" class="btn btn-primary" ng-click="showEdit(); selectUser(rs);" title="Print"><i class="fa fa-print" aria-hidden="true"></i></i></button> 
+                                <button type="button" class="btn btn-success" ng-click="showEdit(); selectUser(rs);" title="Send"><i class="fa fa-paper-plane" aria-hidden="true"></i></button> 
+                                <button type="button" class="btn btn-danger" ng-click="showDelete(); selectUser(rs);" title="Delete"> <i class="fa fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="pull-right" style="margin-top:-30px;">
+                    <dir-pagination-controls
+                       max-size="5"
+                       direction-links="true"
+                       boundary-links="true" >
+                    </dir-pagination-controls>
+                </div>
+            </div>
+
+            <div id="Paris" class="tabcontent" ng-show="approvedtab" style="display:block;">
+                <h3>Paris</h3>
+                <p>Paris is the capital of France.</p> 
+            </div>
+
+            <div id="Tokyo" class="tabcontent" ng-show="foryourapprovaltab" style="display:block;">
+                <h3>Tokyo</h3>
+                <p>Tokyo is the capital of Japan.</p>
+            </div>
+            
+   
+   
+        </div>
+    </div>
+    <!-- <?php include('UserModal.php'); ?> -->
+	<div ng-include="'ReImbModal.html'"></div>
+</div>
+
+<style>
+.pagination {
+    display: inline-block;
+    padding-left: 0;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+.pagination>li {
+    display: inline;
+}
+.pagination>li:first-child>a, .pagination>li:first-child>span {
+    margin-left: 0;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+.pagination>.disabled>a, .pagination>.disabled>a:focus, .pagination>.disabled>a:hover, .pagination>.disabled>span, .pagination>.disabled>span:focus, .pagination>.disabled>span:hover {
+    color: #777;
+    cursor: not-allowed;
+    background-color: #fff;
+    border-color: #ddd;
+}
+.pagination>li>a, .pagination>li>span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #337ab7;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+    z-index: 3;
+    color: #fff;
+    cursor: default;
+    background-color: #337ab7;
+    border-color: #337ab7;
+}
+</style>

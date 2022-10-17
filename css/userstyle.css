@@ -1,0 +1,138 @@
+
+a:link {
+    text-decoration: none;
+   
+  }
+.footer1 {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #696969;
+    color: white;
+    text-align: center;
+    z-index: -2;
+ }
+.gray{
+    color:gray;
+}
+ 
+.input-error{
+    font-size:12px;
+    color:#f44336;
+}
+ 
+.myModal{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index:100;
+}
+ 
+.modalContainer{
+    width: 555px;
+    background: #FFFFFF;
+    margin:auto;
+    margin-top:10px;
+}
+ 
+.modalHeader{
+    padding:10px;
+    background: #008CBA;
+    color: #FFFFFF;
+    height:50px;
+    font-size:20px;
+    padding-left:15px;
+}
+ 
+.editHeader{
+    padding:10px;
+    background: #4CAF50;
+    color: #FFFFFF;
+    height:50px;
+    font-size:20px;
+    padding-left:15px;
+}
+ 
+.deleteHeader{
+    padding:10px;
+    background: #f44336;
+    color: #FFFFFF;
+    height:50px;
+    font-size:20px;
+    padding-left:15px;
+}
+ 
+.modalBody{
+    padding:30px;
+}
+ 
+.modalFooter{
+    height:36px;
+}
+ 
+.footerBtn{
+    margin-right:10px;
+    margin-top:-9px;
+}
+ 
+.closeBtn{
+    background: #008CBA;
+    color: #FFFFFF;
+    border:none;
+}
+ 
+.closeEditBtn{
+    background: #4CAF50;
+    color: #FFFFFF;
+    border:none;
+}
+ 
+.closeDelBtn{
+    background: #f44336;
+    color: #FFFFFF;
+    border:none;
+}
+
+
+.pagination {
+    display: inline-block;
+    padding-left: 0;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+.pagination>li {
+    display: inline;
+}
+.pagination>li:first-child>a, .pagination>li:first-child>span {
+    margin-left: 0;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+.pagination>.disabled>a, .pagination>.disabled>a:focus, .pagination>.disabled>a:hover, .pagination>.disabled>span, .pagination>.disabled>span:focus, .pagination>.disabled>span:hover {
+    color: #777;
+    cursor: not-allowed;
+    background-color: #fff;
+    border-color: #ddd;
+}
+.pagination>li>a, .pagination>li>span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #337ab7;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+    z-index: 3;
+    color: #fff;
+    cursor: default;
+    background-color: #337ab7;
+    border-color: #337ab7;
+}

@@ -1,0 +1,28 @@
+
+<div class="col-md-4 col-md-offset-4" style="padding-top:50px;">
+	<img src="./images/gensys.png" alt="Avatar"  alt="Responsive image" class="img-fluid">
+    <div class="login-panel panel panel-primary" style="border-color:gray;">
+        <div class="panel-heading" style="background-color:#696969;">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-lock"></span> Login
+            </h3>
+        </div>
+    	<div class="panel-body" style="background-color:#F8F8FF;">
+        	<form role="form" name="logform">
+            	<fieldset>
+                	<div class="form-group">
+                    	<input class="form-control" placeholder="Username" type="text" autofocus ng-model="user.username" required>
+                	</div>
+                	<div class="form-group">
+                    	<input class="form-control" placeholder="Password" type="password" ng-model="user.password" required>
+                	</div>
+                	<button type="button" id="loginbutton" class="btn btn-lg btn-primary btn-block" ng-disabled="logform.$invalid" ng-click="login(user)" style="background-color:#008000;"><span class="glyphicon glyphicon-log-in"></span> <span id="logtext">Login</span></button>
+            	</fieldset>
+        	</form>
+    	</div>
+    </div>
+ 
+    <div class="alert alert-danger text-center" ng-show="errorLogin">
+        <button type="button" class="close" ng-click="clearMsg()"><span aria-hidden="true">&times;</span></button>
+        {{ errorMsg }}
+    </div>
+</div>

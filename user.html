@@ -1,0 +1,132 @@
+<div ng-include="'menu.html'"></div>
+<div class="container" style="position:fixed;top:70px;left:0px;width: 100%;max-width: 100%;">
+	<!-- <div class="container" id="usercontainer" ng-controller="employeeCTR" ng-init="fetch()"> -->
+    <div class="col-sm-12" style="color: #FFFFFF;font-weight: bold;background-color: #696969;margin-bottom: 10px;"><h1>USERS LIST</h1></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-success text-center" ng-show="success">
+                <button type="button" class="close" ng-click="clearMessage()"><span aria-hidden="true">×</span></button>
+                <i class="fa fa-check"></i> {{ successMessage }}
+            </div>
+            <div class="alert alert-danger text-center" ng-show="error">
+                <button type="button" class="close" ng-lick="clearMessage()"><span aria-hidden="true">×</span></button>
+                <i class="fa fa-warning"></i> {{ errorMessage }}
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <button href="" class="btn btn-primary" ng-click="showAdd()"><i class="fa fa-plus"></i> Add New User</button>
+                    <span class="pull-right">
+                        <input type="text" ng-model="search" class="form-control" placeholder="Search">
+                    </span>
+                </div>
+            </div>
+           
+            <table class="table table-bordered table-striped" style="margin-top:10px;">
+                <thead>
+                    <tr>
+                        <th ng-click="sort('EmployeeNumber')" class="text-center">Employee Number
+                            <span class="pull-right">
+                                <i class="fa fa-sort gray" ng-show="sortKey!='name'"></i>
+                                <i class="fa fa-sort" ng-show="sortKey=='name'" ng-class="{'fa fa-sort-asc':reverse,'fa fa-sort-desc':!reverse}"></i>
+                            </span>
+                        </th>
+                        <th ng-click="sort('name')" class="text-center">Name
+                            <span class="pull-right">
+                                <i class="fa fa-sort gray" ng-show="sortKey!='position'"></i>
+                                <i class="fa fa-sort" ng-show="sortKey=='position'" ng-class="{'fa fa-sort-asc':reverse,'fa fa-sort-desc':!reverse}"></i>
+                            </span>
+                        </th>
+                        <th ng-click="sort('DateCreated')" class="text-center">Date Created
+                            <span class="pull-right">
+                                <i class="fa fa-sort gray" ng-show="sortKey!='office'"></i>
+                                <i class="fa fa-sort" ng-show="sortKey=='office'" ng-class="{'fa fa-sort-asc':reverse,'fa fa-sort-desc':!reverse}"></i>
+                            </span>
+                        </th>                        
+                        <th class="text-center">IsActive</th>
+                        <th class="text-center">Action</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr dir-paginate="rs in employee|orderBy:sortKey:reverse|filter:search|itemsPerPage:7">
+                        
+                        <td>{{ rs.EmpNum }}</td>
+                        <td>{{ rs.LastName }}&nbsp;&nbsp;{{ rs.MiddleName }}&nbsp;&nbsp;{{ rs.FirstName}}</td>
+                        <td>{{ rs.CreatedDate }}</td>
+                        <td>
+                            <div ng-switch on="rs.IsActive">
+                                <div ng-switch-when="1">
+                                    <!-- code to render a large video block-->
+                                    <i class="fa fa-check-circle" aria-hidden="true" style="font-size:25px;color:green;display: block;margin-left: auto;margin-right: auto;width: 50%;"></i>
+                                </div>
+                                <div ng-switch-default>
+                                    <!-- code to render the regular video block -->
+                                    <i class="fa fa-times-circle" aria-hidden="true" style="font-size:25px;color:red;display: block;margin-left: auto;margin-right: auto;width: 50%;"></i>
+                                </div>
+                            </div> 
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-warning" ng-click="showEdit(); selectUser(rs);" title="Edit"><i class="fa fa-edit"></i></button> 
+                            <button type="button" class="btn btn-danger" ng-click="showDelete(); selectUser(rs);" title="Delete"> <i class="fa fa-trash"></i></button>
+                        </td>
+ 
+                    </tr>
+                </tbody>
+            </table>
+            <div class="pull-right" style="margin-top:-30px;">
+                <dir-pagination-controls
+                   max-size="5"
+                   direction-links="true"
+                   boundary-links="true" >
+                </dir-pagination-controls>
+                 
+ 
+            </div>
+   
+   
+        </div>
+    </div>
+    <!-- <?php include('UserModal.php'); ?> -->
+	<div ng-include="'UserModal2.html'"></div>
+</div>
+
+<style>
+.pagination {
+    display: inline-block;
+    padding-left: 0;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+.pagination>li {
+    display: inline;
+}
+.pagination>li:first-child>a, .pagination>li:first-child>span {
+    margin-left: 0;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+.pagination>.disabled>a, .pagination>.disabled>a:focus, .pagination>.disabled>a:hover, .pagination>.disabled>span, .pagination>.disabled>span:focus, .pagination>.disabled>span:hover {
+    color: #777;
+    cursor: not-allowed;
+    background-color: #fff;
+    border-color: #ddd;
+}
+.pagination>li>a, .pagination>li>span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #337ab7;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+    z-index: 3;
+    color: #fff;
+    cursor: default;
+    background-color: #337ab7;
+    border-color: #337ab7;
+}
+</style>

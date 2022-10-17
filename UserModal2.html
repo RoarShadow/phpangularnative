@@ -1,0 +1,245 @@
+
+<!-- Add Modal -->
+<div class="myModal"  ng-show="AddModal" style="overflow: auto;">
+    <div class="modalContainer">
+        <div class="modalHeader">
+            <span class="headerTitle">Add New User</span>
+            <button class="closeBtn pull-right" ng-click="closeAdd()">×</button>
+        </div>
+        <div class="modalBody">
+            <div class="form-group">
+                <label>Employee Number:</label>
+                <input type="text" class="form-control" ng-model="$parent.empnumv" id="empnumv" ng-change="autogenusername()">
+                <span class="pull-right input-error" ng-show="errorempnumv">{{ errorMessage }}</span>
+            </div>
+            <div class="form-group">
+                <label>First Name:</label>
+                <input type="text" class="form-control" ng-model="$parent.fnamev"  id="fnamev" >
+                <span class="pull-right input-error" ng-show="errorfnamev">{{ errorMessage }}</span>
+            </div>
+            <div class="form-group">
+                <label>Middle Name:</label>
+                <input type="text" class="form-control" ng-model="$parent.mnamev"  id="mnamev" >
+                <!-- <span class="pull-right input-error" ng-show="errormnamev">{{ errorMessage }}</span> -->
+            </div>
+            <div class="form-group">
+                <label>Last Name:</label>
+                <input type="text" class="form-control" ng-model="$parent.lnamev"  id="lnamev" >
+                <span class="pull-right input-error" ng-show="errorlnamev">{{ errorMessage }}</span>
+            </div>
+            <div class="form-group">
+                <label>Username:</label>
+                <input type="text" class="form-control" ng-model="$parent.usernamev"  id="usernamev"  readonly>
+                <!-- <span class="pull-right input-error" ng-show="erroroffice">{{ errorMessage }}</span> -->
+            </div>
+            <div class="form-group">
+                <label>Password:</label>
+                <input type="password" class="form-control" ng-model="$parent.passwordv"  id="passwordv">
+                <span class="pull-right input-error" ng-show="errorpasswordv">{{ errorMessage }}</span>
+            </div>
+            <div class="form-group">
+                <label>User Type:</label>
+                <select class="form-control" ng-model="$parent.utypev"  id="utypev">
+                    <option value="0">Admin</option>
+                    <option value="1">Users</option>
+                    <option value="2">Finance</option>
+                </select>
+                <span class="pull-right input-error" ng-show="errorutypev">{{ errorMessage }}</span>
+            </div>
+            <div class="form-group">
+                <label>User Level:</label>
+                <select class="form-control" ng-model="$parent.ulevelv"  id="ulevelv">
+                    <option value="1">Level 1</option>
+                    <option value="2">Level 2</option>
+                    <option value="3">Level 3</option>
+                </select>
+                <span class="pull-right input-error" ng-show="errorulevelv">{{ errorMessage }}</span>
+            </div>
+            <div class="form-group">
+                <label>User Category:</label>
+                <select class="form-control" ng-model="$parent.ucategoryv"  id="ucategoryv">
+                    <option value="1">Admin Dept</option>
+                    <option value="2">Sales Dept</option>
+                    <option value="3">Others Dept</option>
+                </select>
+                <span class="pull-right input-error" ng-show="errorucategoryv">{{ errorMessage }}</span>
+            </div>
+            <div class="form-group">
+                <label>1st Approver:</label>
+                <select class="form-control" ng-model="$parent.approverv"  id="approverv">
+                    <option  ng-repeat="userlist in employee" value="{{userlist.userid}}">{{ userlist.FirstName }}&nbsp;&nbsp;{{ userlist.MiddleName }}&nbsp;&nbsp;{{ userlist.LastName }}</option>
+                </select>
+                <span class="pull-right input-error" ng-show="errorapproverv">{{ errorMessage }}</span>
+            </div>
+            <div class="form-group">
+                <label>2nd Approver:</label>
+                <select class="form-control" ng-model="$parent.approver2v"  id="approverv2">
+                    <option  ng-repeat="userlist in employee" value="{{userlist.userid}}">{{ userlist.FirstName }}&nbsp;&nbsp;{{ userlist.MiddleName }}&nbsp;&nbsp;{{ userlist.LastName }}</option>
+                </select>
+                <span class="pull-right input-error" ng-show="errorapprover2v">{{ errorMessage }}</span>
+            </div>
+            <div class="form-group">
+                <label>Alternative Approver:</label>
+                <select class="form-control" ng-model="$parent.altapproverv"  id="altapproverv">
+                    <option  ng-repeat="userlist in employee" value="{{userlist.userid}}">{{ userlist.FirstName }}&nbsp;&nbsp;{{ userlist.MiddleName }}&nbsp;&nbsp;{{ userlist.LastName }}</option>
+                </select>
+                <span class="pull-right input-error" ng-show="erroraltapproverv">{{ errorMessage }}</span>
+            </div>
+            <div class="form-group">
+                <label>Email:</label>   
+                <input type="text" class="form-control" ng-model="$parent.emailv"  id="emailv" [email]="true">
+                <span class="pull-right input-error" ng-show="erroremailv">{{ errorMessage }}</span>
+            </div>
+            <div class="form-group">
+                <label>User Code Name:</label>   
+                <input type="text" class="form-control" ng-model="$parent.ucodefv"  id="ucodefv">
+                <span class="pull-right input-error" ng-show="errorucodefv">{{ errorMessage }}</span>
+            </div>
+            <div class="form-group">
+                <label>Is Active:</label>   
+                <select class="form-control" ng-model="$parent.isactivev"  id="isactivev">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+                <span class="pull-right input-error" ng-show="errorisactivev">{{ errorMessage }}</span>
+            </div>
+        </div>
+        <hr>
+        <div class="modalFooter">
+            <div class="footerBtn pull-right">
+                <button class="btn btn-default" ng-click="closeAdd()"><span class="glyphicon glyphicon-remove"></span> Cancel</button> <button class="btn btn-primary" ng-click="addnew()"><span class="glyphicon glyphicon-floppy-disk"></span> Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+<!-- Edit Modal -->
+<div class="myModal" ng-show="EditModal" style="overflow: auto;">
+    <div class="modalContainer">
+        <div class="editHeader">
+            <span class="headerTitle">Edit Employee</span>
+            <button class="closeEditBtn pull-right" ng-click="closeEdit()">×</button>
+        </div>
+        <div class="modalBody">
+            <!-- <div class="form-group">
+                <label>Name:</label>
+                <input type="text" class="form-control" ng-model="clickEmployee.name">
+            </div>
+            <div class="form-group">
+                <label>Position:</label>
+                <input type="text" class="form-control" ng-model="clickEmployee.position">
+            </div>
+            <div class="form-group">
+                <label>Office:</label>
+                <input type="text" class="form-control" ng-model="clickEmployee.office">
+            </div> -->
+            <div class="form-group">
+                <label>Employee Number:</label>
+                <input type="text" class="form-control" ng-model="clickEmployee.EmpNum" ng-change="autogenusername2()">      
+            </div>
+            <div class="form-group">
+                <label>First Name:</label>
+                <input type="text" class="form-control" ng-model="clickEmployee.FirstName" >
+            </div>
+            <div class="form-group">
+                <label>Middle Name:</label>
+                <input type="text" class="form-control" ng-model="clickEmployee.MiddleName" >
+            </div>
+            <div class="form-group">
+                <label>Last Name:</label>
+                <input type="text" class="form-control" ng-model="clickEmployee.LastName" >
+            </div>
+            <div class="form-group">
+                <label>Username:</label>
+                <input type="text" class="form-control" ng-model="clickEmployee.username" readonly>
+            </div>
+            <div class="form-group">
+                <label>Password:</label>
+                <input type="password" class="form-control" ng-model="clickEmployee.passwrd">
+            </div>
+            <div class="form-group">
+                <label>User Type:</label>
+                <select class="form-control" ng-model="clickEmployee.UserType">
+                    <option value="0">Admin</option>
+                    <option value="1">Users</option>
+                    <option value="2">Finance</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>User Level:</label>
+                <select class="form-control" ng-model="clickEmployee.UserLevel">
+                    <option value="1">Level 1</option>
+                    <option value="2">Level 2</option>
+                    <option value="3">Level 3</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>User Category:</label>
+                <select class="form-control" ng-model="clickEmployee.UserCategory">
+                    <option value="1">Admin Dept</option>
+                    <option value="2">Sales Dept</option>
+                    <option value="3">Others Dept</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>1st Approver:</label>
+                <select class="form-control" ng-model="clickEmployee.ApproverId">
+                    <option  ng-repeat="userlist in employee" value="{{userlist.userid}}">{{ userlist.FirstName }}&nbsp;&nbsp;{{ userlist.MiddleName }}&nbsp;&nbsp;{{ userlist.LastName }}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>2nd Approver:</label>
+                <select class="form-control" ng-model="clickEmployee.ApproverId2">
+                    <option  ng-repeat="userlist in employee" value="{{userlist.userid}}">{{ userlist.FirstName }}&nbsp;&nbsp;{{ userlist.MiddleName }}&nbsp;&nbsp;{{ userlist.LastName }}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Alternative Approver:</label>
+                <select class="form-control" ng-model="clickEmployee.AlternateApprover">
+                    <option  ng-repeat="userlist in employee" value="{{userlist.userid}}">{{ userlist.FirstName }}&nbsp;&nbsp;{{ userlist.MiddleName }}&nbsp;&nbsp;{{ userlist.LastName }}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Email:</label>   
+                <input type="text" class="form-control" ng-model="clickEmployee.UserEmail">
+            </div>
+            <div class="form-group">
+                <label>User Code Name:</label>   
+                <input type="text" class="form-control" ng-model="clickEmployee.UserCode">
+            </div>
+            <div class="form-group">
+                <label>Is Active:</label>   
+                <select class="form-control" ng-model="clickEmployee.IsActive">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+        </div>
+        <hr>
+        <div class="modalFooter">
+            <div class="footerBtn pull-right">
+                <button class="btn btn-default" ng-click="closeEdit()"><span class="glyphicon glyphicon-remove"></span> Cancel</button> <button class="btn btn-success" ng-click="updateEmployee();"><span class="glyphicon glyphicon-check"></span> Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+<!-- Delete Modal -->
+<div class="myModal" ng-show="DeleteModal">
+    <div class="modalContainer">
+        <div class="deleteHeader">
+            <span class="headerTitle">Delete Employee</span>
+            <button class="closeDelBtn pull-right" ng-click="closeDelete()">×</button>
+        </div>
+        <div class="modalBody">
+            <h5 class="text-center">Are you sure you want to delete</h5>
+            <h2 class="text-center">{{clickEmployee.name}}</h2>
+        </div>
+        <hr>
+        <div class="modalFooter">
+            <div class="footerBtn pull-right">
+                <button class="btn btn-default" ng-click="closeDelete()"><span class="glyphicon glyphicon-remove"></span> Cancel</button> <button class="btn btn-danger" ng-click="deleteEmployee(); "><span class="glyphicon glyphicon-trash"></span> Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
